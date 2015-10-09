@@ -1,5 +1,7 @@
 package br.senai.sc.tii2014.n1.anna.bancomedicamentos.bean;
 
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 
@@ -8,9 +10,27 @@ import br.senai.sc.tii2014.n1.anna.bancomedicamentos.model.entity.Medicamento;
 
 @ManagedBean
 public class MedicamentoBean {
-
+	
+	private List<Medicamento> medicamentos;
 	private Medicamento medicamento;
 	private MedicamentoRn rn;
+	
+	@PostConstruct
+	public void init(){
+		rn = new MedicamentoRn();
+		medicamento = new Medicamento();
+	}
+	
+	public List<Medicamento> getMedicamentos(){
+		if(medicamentos == null){
+			medicamentos = rn.listar();
+		}
+		return medicamentos;
+	}
+	
+	public void setMedicamentos(List<Medicamento> medicamentos){
+		this.medicamentos = medicamentos;		
+	}
 	
 	
 	public Medicamento getMedicamento() {
@@ -21,12 +41,7 @@ public class MedicamentoBean {
 		this.medicamento = medicamento;
 	}
 
-	@PostConstruct
-	public void init(){
-		rn = new MedicamentoRn();
-		medicamento = new Medicamento();
-		
-	}
+
 	
 	public String salvar(){
 		try {

@@ -1,5 +1,7 @@
 package br.senai.sc.tii2014.n1.anna.bancomedicamentos.model;
 
+import java.util.List;
+
 import br.senai.sc.tii2014.n1.anna.bancomedicamentos.dao.MedicamentoDao;
 import br.senai.sc.tii2014.n1.anna.bancomedicamentos.model.entity.Medicamento;
 
@@ -26,6 +28,14 @@ public class MedicamentoRn {
 			throw new Exception("A duração do medicamento é obrigatória.");
 		}
 		dao.salvar(medicamento);
+	}
+	
+	public List<Medicamento> listar(){
+		return dao.listarTodos();
+	}
+
+	public Medicamento buscarPorId(Long id){
+		return dao.buscaPorId(id);
 	}
 
 }

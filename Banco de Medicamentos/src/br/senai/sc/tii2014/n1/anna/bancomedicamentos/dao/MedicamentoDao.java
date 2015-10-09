@@ -1,6 +1,9 @@
 package br.senai.sc.tii2014.n1.anna.bancomedicamentos.dao;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.senai.sc.tii2014.n1.anna.bancomedicamentos.model.entity.Medicamento;
 
@@ -35,6 +38,49 @@ public class MedicamentoDao extends Dao{
 			e.printStackTrace();
 			throw new Exception("Erro ao tentar cadastrar seu medicamento.");
 		}
+	}
+	
+	public List<Medicamento> listarTodos(){
+		List<Medicamento> medicamentos = new ArrayList<Medicamento>();
+		try {
+			PreparedStatement ps = getConnection().prepareStatement(SELECT);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()){
+				Medicamento medicamento = new Medicamento();
+				medicamento.setNome(rs.getString("nome"));
+				medicamento.setDosagem(rs.getString("dosagem"));
+				medicamento.setIntervalo(rs.getString("intervalo"));
+				medicamento.setDuracao(rs.getString("duracao"));
+				medicamento.setId(rs.getLong("id"));
+				medicamentos.add(medicamento);				
+			}			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Erro ao executar o select de medicamentos" + e);
+		}
+		return medicamentos;
+	}
+			
+	public Medicamento buscaPorId(Long id){
+		try {
+			PreparedStatement ps = getConnection().prepareStatement(SELECT_ID);
+			ps.setLong(1, id);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()){
+				Medicamento medicamento = new Medicamento();
+				medicamento.setNome(rs.getString("nome"));
+				medicamento.setDosagem(rs.getString("dosagem"));
+				medicamento.setIntervalo(rs.getString("intervalo"));
+				medicamento.setDuracao(rs.getString("duracao"));
+				medicamento.setId(rs.getLong("id"));
+				return medicamento;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Erro ao executar o select de medicamentos." + e);
+		}
+		return null;
 	}
 
 }
