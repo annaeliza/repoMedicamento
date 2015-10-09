@@ -59,4 +59,15 @@ public class MedicamentoBean {
 		return "cadastroMedicamentos";
 	}
 	
+	public String excluir(String idParam){
+		Long id = Long.parseLong(idParam);
+		try {
+			rn.excluir(id);
+			medicamentos = null;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
+	
 }

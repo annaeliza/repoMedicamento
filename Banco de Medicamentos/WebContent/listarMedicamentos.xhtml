@@ -44,6 +44,12 @@
 				</f:facet>
 				<h:commandButton action="#{medicamentoBean.editar(medicamento.id)}" value="Editar"/>
 			</h:column>
+			<h:column>
+			<f:facet name="header">
+					<h:outputText value="Excluir" />
+				</f:facet>
+				<h:commandButton action="#{medicamentoBean.excluir(medicamento.id)}" value="Excluir"/>
+			</h:column>
 			
 			
 			

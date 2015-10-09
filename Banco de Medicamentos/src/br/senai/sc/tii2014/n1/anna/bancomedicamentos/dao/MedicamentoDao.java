@@ -99,5 +99,18 @@ public class MedicamentoDao extends Dao{
 			System.out.println("Erro ao executar o update" + e);
 		}
 	}
+	
+	public void excluir (Long id) throws Exception{
+		try {
+			PreparedStatement ps = getConnection().prepareStatement(DELETE);
+			ps.setLong(1, id);
+			ps.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Erro ao executar o delete" + e);
+			throw new Exception("Erro ao tentar excluir.");
+		}
+	}
 
 }

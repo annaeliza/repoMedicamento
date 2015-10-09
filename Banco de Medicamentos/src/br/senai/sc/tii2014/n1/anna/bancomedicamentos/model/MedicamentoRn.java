@@ -38,4 +38,7 @@ public class MedicamentoRn {
 		return dao.buscaPorId(id);
 	}
 
+	public void excluir(Long id) throws Exception{
+		dao.excluir(id);
+	}
 }
