@@ -38,6 +38,12 @@
 				</f:facet>
 				<h:outputText value="#{medicamento.duracao}" />
 			</h:column>
+			<h:column>
+			<f:facet name="header">
+					<h:outputText value="Alterar" />
+				</f:facet>
+				<h:commandButton action="#{medicamentoBean.editar(medicamento.id)}" value="Editar"/>
+			</h:column>
 			
 			
 			

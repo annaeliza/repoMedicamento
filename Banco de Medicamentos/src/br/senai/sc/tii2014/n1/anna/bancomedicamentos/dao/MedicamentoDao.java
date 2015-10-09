@@ -19,7 +19,7 @@ public class MedicamentoDao extends Dao{
 		if(medicamento.getId() == 0){
 			inserir(medicamento);
 		} else {
-			//alterar(medicamento);
+			alterar(medicamento);
 		}
 		
 	}
@@ -81,6 +81,23 @@ public class MedicamentoDao extends Dao{
 			System.out.println("Erro ao executar o select de medicamentos." + e);
 		}
 		return null;
+	}
+	
+	private void alterar(Medicamento medicamento){
+		try {
+			PreparedStatement ps = getConnection().prepareStatement(UPDATE);
+			ps.setString(1, medicamento.getNome());
+			ps.setString(2, medicamento.getDosagem());
+			ps.setString(3, medicamento.getIntervalo());
+			ps.setString(4, medicamento.getDuracao());
+			ps.setLong(5, medicamento.getId());
+			
+			ps.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Erro ao executar o update" + e);
+		}
 	}
 
 }
